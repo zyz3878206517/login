@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>齐鲁工业大学登录页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background-color: #fff;
+        }
+        .header-banner {
+            width: 100%;
+            height: 220px;
+            /* 改为本地图片路径 */
+            background: url("school-bg.jpg") no-repeat center top;
+            background-size: cover;
+            position: relative;
+        }
+        .header-banner::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50% 50% 0 0 / 30px 30px 0 0;
+        }
+        .logo {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            left: 50%;
+            bottom: -60px;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .school-name {
+            text-align: center;
+            font-size: 32px;
+            color: #003399;
+            font-weight: bold;
+            margin: 80px 0 40px;
+            font-family: "KaiTi", "STKaiti", serif;
+        }
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        .tab-item {
+            padding: 12px 20px;
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+            position: relative;
+        }
+        .tab-item.active {
+            color: #003399;
+            font-weight: bold;
+        }
+        .tab-item.active::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #003399;
+        }
+        .form-container {
+            width: 90%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .input-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .input-item input {
+            width: 100%;
+            padding: 16px 16px 16px 50px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 18px;
+        }
+        .input-item .icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #999;
+        }
+        .input-item .eye-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #999;
+            cursor: pointer;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background-color: #99aeee;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .forgot-pwd {
+            text-align: right;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 120px;
+        }
+        .footer-links {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 18px;
+            color: #666;
+        }
+        .footer-links span {
+            margin: 0 10px;
+            color: #ccc;
+        }
+        .copyright {
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-banner">
+        <div class="logo">
+            <!-- 改为本地图片路径 -->
+            <img src="qilu-logo.png" alt="齐鲁工业大学logo">
+        </div>
+    </div>
+    <div class="school-name">齐鲁工业大学</div>
+    <div class="tab-container">
+        <div class="tab-item active">用户名密码</div>
+        <div class="tab-item">短信验证码</div>
+        <div class="tab-item">刷脸认证</div>
+    </div>
+    <div class="form-container">
+        <div class="input-item">
+            <span class="icon">👤</span>
+            <input type="text" id="username" placeholder="请输入学工号/身份证件号">
+        </div>
+        <div class="input-item">
+            <span class="icon">🔒</span>
+            <input type="password" id="password" placeholder="请输入密码">
+            <span class="eye-icon" id="togglePwd">👁️</span>
+        </div>
+        <button class="login-btn" id="loginBtn">登录</button>
+        <div class="forgot-pwd">忘记密码</div>
+    </div>
+    <div class="footer-links">
+        账号激活 <span>|</span> 工作伙伴服务
+    </div>
+    <div class="copyright">
+        版权所有 ©齐鲁工业大学（山东省科学院）
+    </div>
+
+    <script>
+        // 密码显示/隐藏切换
+        const togglePwd = document.getElementById('togglePwd');
+        const pwdInput = document.getElementById('password');
+        togglePwd.addEventListener('click', function() {
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                togglePwd.textContent = '🙈';
+            } else {
+                pwdInput.type = 'password';
+                togglePwd.textContent = '👁️';
+            }
+        });
+
+        // 登录逻辑
+        const loginBtn = document.getElementById('loginBtn');
+        loginBtn.addEventListener('click', function() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (username === '202485013016' && password === 'zhang710990') {
+                // 跳转到成绩查询页，这里把路径改成你自己的成绩页地址
+                window.location.href = './score.html';
+            } else {
+                alert('账号或密码错误，请重新输入');
+            }
+        });
+    </script>
+</body>
+</html>
